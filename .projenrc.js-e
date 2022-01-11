@@ -1,15 +1,12 @@
-const { AwsCdkConstructLibrary, NpmAccess, awscdk } = require('projen');
+const { AwsCdkConstructLibrary, NpmAccess } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'cloudadder',
   authorAddress: 'cloudadder.com@gmail.com',
   cdkVersion: '2.5.0',
   defaultReleaseBranch: 'main',
   dependabot: true,
-  dependabotOptions: {
-    scheduleInterval: 'weekly',
-  },
   name: 'cdk-ec2-imagebuilder',
-  npmAccess: 'public',
+  npmAccess: NpmAccess.PUBLIC,
   repositoryUrl: 'https://github.com/cloudadder/cdk-ec2-imagebuilder.git',
 
   // cdkDependencies: undefined,      /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
