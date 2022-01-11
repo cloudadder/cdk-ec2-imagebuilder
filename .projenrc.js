@@ -8,7 +8,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   dependabotOptions: {
     scheduleInterval: 'weekly',
   },
-  name: 'cdk-ec2-imagebuilder',
+  name: '@cloudadder/cdk-ec2-imagebuilder',
   npmAccess: 'public',
   repositoryUrl: 'https://github.com/cloudadder/cdk-ec2-imagebuilder.git',
 
