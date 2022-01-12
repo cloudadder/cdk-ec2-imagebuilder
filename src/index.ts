@@ -1,1 +1,1 @@
-export * from './samplebucket';
+export * from './imagebuilder';

@@ -1,0 +1,16 @@
+name: HelloWorld
+description: Echos the message "Hello World"
+schemaVersion: 1.0
+phases:
+  -
+    name: 'build'
+    steps:
+      -
+        name: HelloWorldShellStep
+        action: ExecuteBash
+        timeoutSeconds: 120
+        onFailure: Abort
+        maxAttempts: 3
+        inputs:
+          commands:
+            - 'echo "Hello World"'
