@@ -84,17 +84,17 @@ export class ImageBuilder extends Construct {
 
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {
       version: props.version,
-      name: 'ImageRecipe',
+      name: 'ImageRecipe' + props.amiName,
       parentImage: props.parentImage,
       components: componentArns,
     });
 
 
     const infrastructureConfiguration = new imagebuilder.CfnInfrastructureConfiguration(this, 'ImageInfrastructureConfiguration', {
-      name: 'ImageInfrastructureConfiguration',
+      name: 'ImageInfrastructureConfiguration' + props.amiName,
       description: 'ImageInfrastructureConfiguration',
       instanceTypes: props.instanceTypes,
-      instanceProfileName: 'ImageBuilderInstanceProfile',
+      instanceProfileName: 'ImageBuilderInstanceProfile' + props.amiName,
       keyPair: 'keypair',
       securityGroupIds: props.securityGroupIds,
       subnetId: props.subnetId,
@@ -118,7 +118,7 @@ export class ImageBuilder extends Construct {
     // };
 
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {
-      name: 'ImagePipeline',
+      name: 'ImagePipeline' + props.amiName,
       description: 'ImagePipeline',
       imageRecipeArn: imageRecipe.attrArn,
       infrastructureConfigurationArn: infrastructureConfiguration.attrArn,
