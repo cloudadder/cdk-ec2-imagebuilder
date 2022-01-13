@@ -35,5 +35,9 @@ describe('ImageBuilderStack', () => {
       ParentImage: 'arn:aws:imagebuilder:ap-southeast-2:aws:image/amazon-linux-2-x86/x.x.x',
     });
 
+    Template.fromStack(stack).hasResourceProperties('AWS::IAM::Role', {
+      RoleName: 'ImageBuilderRole-test-ami',
+    });
+
   });
 });

@@ -53,7 +53,7 @@ export class ImageBuilder extends Construct {
 
     const role = new iam.Role(this, 'ImageBuilderRole', {
       assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
-      roleName: 'ImageBuilderRole',
+      roleName: 'ImageBuilderRole-' + props.amiName,
     });
 
     role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
