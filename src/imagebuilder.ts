@@ -65,19 +65,20 @@ export class ImageBuilder extends Construct {
       roles: [role.roleName],
     });
 
+    let count = 0;
     fs.readdirSync('' + props.componentsFolder).forEach((file: any) => {
       console.log('Adding component file : ' + file);
       const yaml = fs.readFileSync(path.join(props.componentsFolder, file), 'utf-8');
 
       const component = new imagebuilder.CfnComponent(this, 'Component-' + file, {
-        name: 'Component-' + file,
+        name: 'component' + file,
         platform: 'Linux',
         version: props.version,
         data: yaml,
       });
 
       componentArns.push({ componentArn: component.attrArn });
-      Tags.of(component).add('component-yaml-' + file, 'applied');
+      Tags.of(component).add('component-' + count, file);
     });
 
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {

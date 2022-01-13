@@ -27,7 +27,7 @@ describe('ImageBuilderStack', () => {
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::Component', {
       Tags: {
-        'component-yaml-helloworld.yaml': 'applied',
+        'component-0': 'helloworld.yaml',
       },
     });
 
