@@ -79,6 +79,7 @@ export class ImageBuilder extends Construct {
 
       componentArns.push({ componentArn: component.attrArn });
       Tags.of(component).add('component-' + count, file);
+      count++;
     });
 
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {
