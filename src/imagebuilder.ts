@@ -71,7 +71,7 @@ export class ImageBuilder extends Construct {
       const yaml = fs.readFileSync(path.join(props.componentsFolder, file), 'utf-8');
 
       const component = new imagebuilder.CfnComponent(this, 'Component-' + file, {
-        name: 'component' + file,
+        name: 'component-' + file.replace('.', '-'),
         platform: 'Linux',
         version: props.version,
         data: yaml,

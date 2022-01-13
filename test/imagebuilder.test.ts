@@ -29,6 +29,7 @@ describe('ImageBuilderStack', () => {
       Tags: {
         'component-0': 'helloworld.yaml',
       },
+      Name: 'component-helloworld-yaml',
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::ImageRecipe', {
