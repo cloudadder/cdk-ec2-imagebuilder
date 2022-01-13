@@ -61,7 +61,7 @@ export class ImageBuilder extends Construct {
     role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('EC2InstanceProfileForImageBuilderECRContainerBuilds'));
 
     const instanceProfile = new iam.CfnInstanceProfile(this, 'ImageBuilderInstanceProfile', {
-      instanceProfileName: 'ImageBuilderInstanceProfile',
+      instanceProfileName: 'ImageBuilderInstanceProfile' + props.amiName,
       roles: [role.roleName],
     });
 
