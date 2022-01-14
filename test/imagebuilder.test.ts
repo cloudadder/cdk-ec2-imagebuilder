@@ -40,5 +40,9 @@ describe('ImageBuilderStack', () => {
       RoleName: 'ImageBuilderRole-test-ami',
     });
 
+    Template.fromStack(stack).hasResourceProperties('Custom::EC2-Key-Pair', {
+      Name: 'keypair-test-ami',
+    });
+
   });
 });
