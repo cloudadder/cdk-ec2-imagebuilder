@@ -2,6 +2,10 @@ const { AwsCdkConstructLibrary, NpmAccess, awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'cloudadder',
   authorAddress: 'cloudadder.com@gmail.com',
+  bundledDeps: [
+    'cdk-ec2-key-pair',
+    'cdk-iam-floyd',
+  ],
   cdkVersion: '2.8.0',
   defaultReleaseBranch: 'main',
   dependabot: true,

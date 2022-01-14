@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { aws_iam as iam, aws_imagebuilder as imagebuilder, CfnOutput, Tags } from 'aws-cdk-lib';
 import { CfnImageRecipe } from 'aws-cdk-lib/aws-imagebuilder';
+import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
 
 var componentArns: Array<CfnImageRecipe.ComponentConfigurationProperty> = [];
@@ -65,6 +66,11 @@ export class ImageBuilder extends Construct {
       roles: [role.roleName],
     });
 
+    const key = new KeyPair(this, 'AKeyPair', {
+      name: 'keypair-' + props.amiName,
+      description: 'This is a Key Pair for the Image Builder',
+    });
+
     let count = 0;
     fs.readdirSync('' + props.componentsFolder).forEach((file: any) => {
       console.log('Adding component file : ' + file);
@@ -95,7 +101,7 @@ export class ImageBuilder extends Construct {
       description: 'ImageInfrastructureConfiguration',
       instanceTypes: props.instanceTypes,
       instanceProfileName: 'ImageBuilderInstanceProfile' + props.amiName,
-      keyPair: 'keypair',
+      keyPair: key.keyPairName,
       securityGroupIds: props.securityGroupIds,
       subnetId: props.subnetId,
       terminateInstanceOnFailure: true,
