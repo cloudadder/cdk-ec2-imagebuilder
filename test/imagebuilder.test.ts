@@ -49,7 +49,7 @@ describe('ImageBuilderStack', () => {
       Distributions: [
         {
           AmiDistributionConfiguration: {
-            name: 'test-ami',
+            name: 'test-ami-{{imagebuilder:buildDate}}',
           },
           Region: 'ap-southeast-2',
         },
