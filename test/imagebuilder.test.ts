@@ -44,5 +44,16 @@ describe('ImageBuilderStack', () => {
       Name: 'keypair-test-ami',
     });
 
+    Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::DistributionConfiguration', {
+      Distributions: [
+        {
+          AmiDistributionConfiguration: {
+            name: 'test-ami',
+          },
+          Region: 'ap-southeast-2',
+        },
+      ],
+      Name: 'test-ami',
+    });
   });
 });

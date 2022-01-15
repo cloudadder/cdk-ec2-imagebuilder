@@ -112,7 +112,7 @@ export class ImageBuilder extends Construct {
       distributions: [{
         region: props.region,
         amiDistributionConfiguration: {
-          name: props.amiName + '-{{imagebuilder:buildDate}}',
+          name: props.amiName,
         },
       }],
       name: props.amiName,
