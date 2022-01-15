@@ -58,8 +58,9 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | the ami name. |
+| [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | the AMI name. |
 | [`componentsFolder`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsfolder)<span title="Required">*</span> | `string` | Local folder name including path which contains the component yaml files. |
+| [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | the id to use as a name suffix to identify resources. |
 | [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes)<span title="Required">*</span> | `string`[] | the instance types to use for the build. |
 | [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage)<span title="Required">*</span> | `string` | Parent AMI Image Arn. |
 | [`region`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyregion)<span title="Required">*</span> | `string` | region the build will run in. |
@@ -77,7 +78,7 @@ public readonly amiName: string;
 
 - *Type:* `string`
 
-the ami name.
+the AMI name.
 
 ---
 
@@ -90,6 +91,18 @@ public readonly componentsFolder: string;
 - *Type:* `string`
 
 Local folder name including path which contains the component yaml files.
+
+---
+
+##### `id`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.id" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyid"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* `string`
+
+the id to use as a name suffix to identify resources.
 
 ---
 
