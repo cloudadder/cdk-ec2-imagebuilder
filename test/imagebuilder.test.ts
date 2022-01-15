@@ -19,6 +19,7 @@ describe('ImageBuilderStack', () => {
       parentImage: 'arn:aws:imagebuilder:ap-southeast-2:aws:image/amazon-linux-2-x86/x.x.x',
       region: 'ap-southeast-2',
       amiName: 'test-ami',
+      id: 'test-123',
       subnetId: 'subnet-12345',
       securityGroupIds: ['sg-12345'],
       version: '1.0.0',
@@ -37,11 +38,11 @@ describe('ImageBuilderStack', () => {
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::IAM::Role', {
-      RoleName: 'ImageBuilderRole-test-ami',
+      RoleName: 'ImageBuilderRole-test-123',
     });
 
     Template.fromStack(stack).hasResourceProperties('Custom::EC2-Key-Pair', {
-      Name: 'keypair-test-ami',
+      Name: 'keypair-test-123',
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::DistributionConfiguration', {
@@ -53,7 +54,7 @@ describe('ImageBuilderStack', () => {
           Region: 'ap-southeast-2',
         },
       ],
-      Name: 'test-ami',
+      Name: 'test-123',
     });
   });
 });

@@ -23,9 +23,14 @@ export interface ImageBuilderProps {
   readonly region: string;
 
   /**
-   * the ami name.
+   * the AMI name.
    */
   readonly amiName: string;
+
+  /**
+   * the id to use as a name suffix to identify resources.
+   */
+  readonly id: string;
 
   /**
    * the subnet id to use for the build.
@@ -54,7 +59,7 @@ export class ImageBuilder extends Construct {
 
     const role = new iam.Role(this, 'ImageBuilderRole', {
       assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
-      roleName: 'ImageBuilderRole-' + props.amiName,
+      roleName: 'ImageBuilderRole-' + props.id,
     });
 
     role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
@@ -62,12 +67,12 @@ export class ImageBuilder extends Construct {
     role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('EC2InstanceProfileForImageBuilderECRContainerBuilds'));
 
     const instanceProfile = new iam.CfnInstanceProfile(this, 'ImageBuilderInstanceProfile', {
-      instanceProfileName: 'ImageBuilderInstanceProfile' + props.amiName,
+      instanceProfileName: 'ImageBuilderInstanceProfile' + props.id,
       roles: [role.roleName],
     });
 
     const key = new KeyPair(this, 'AKeyPair', {
-      name: 'keypair-' + props.amiName,
+      name: 'keypair-' + props.id,
       description: 'This is a Key Pair for the Image Builder',
     });
 
@@ -90,17 +95,17 @@ export class ImageBuilder extends Construct {
 
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {
       version: props.version,
-      name: 'ImageRecipe' + props.amiName,
+      name: 'ImageRecipe' + props.id,
       parentImage: props.parentImage,
       components: componentArns,
     });
 
 
     const infrastructureConfiguration = new imagebuilder.CfnInfrastructureConfiguration(this, 'ImageInfrastructureConfiguration', {
-      name: 'ImageInfrastructureConfiguration' + props.amiName,
+      name: 'ImageInfrastructureConfiguration' + props.id,
       description: 'ImageInfrastructureConfiguration',
       instanceTypes: props.instanceTypes,
-      instanceProfileName: 'ImageBuilderInstanceProfile' + props.amiName,
+      instanceProfileName: 'ImageBuilderInstanceProfile' + props.id,
       keyPair: key.keyPairName,
       securityGroupIds: props.securityGroupIds,
       subnetId: props.subnetId,
@@ -115,7 +120,7 @@ export class ImageBuilder extends Construct {
           name: props.amiName,
         },
       }],
-      name: props.amiName,
+      name: props.id,
     });
 
     // const schedule: imagebuilder.CfnImagePipeline.ScheduleProperty = {
@@ -124,7 +129,7 @@ export class ImageBuilder extends Construct {
     // };
 
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {
-      name: 'ImagePipeline' + props.amiName,
+      name: 'ImagePipeline' + props.id,
       description: 'ImagePipeline',
       imageRecipeArn: imageRecipe.attrArn,
       infrastructureConfigurationArn: infrastructureConfiguration.attrArn,
