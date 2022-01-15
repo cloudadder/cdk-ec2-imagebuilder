@@ -176,6 +176,8 @@ public readonly version: string;
 
 version to use in the metadata of the build.
 
+AWS requires a version unique to the build, therefore incrementing the version number is required for each deployment.
+
 ---
 
 
