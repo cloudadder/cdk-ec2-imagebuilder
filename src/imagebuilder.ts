@@ -51,6 +51,12 @@ export interface ImageBuilderProps {
    * @default - [t3.medium]
    */
   readonly instanceTypes?: string[];
+
+  /**
+   * The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI.
+   * @default - No schedule
+   */
+  readonly scheduleExpression?: string;
 }
 
 export class ImageBuilder extends Construct {
@@ -125,19 +131,21 @@ export class ImageBuilder extends Construct {
       name: props.id,
     });
 
-    // const schedule: imagebuilder.CfnImagePipeline.ScheduleProperty = {
-    //   pipelineExecutionStartCondition: 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE',
-    //   scheduleExpression: 'cron(0 8 1 * ? *)', //Run at 8:00 AM (UTC) on the first day of every month
-    // };
-
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {
       name: 'ImagePipeline' + props.id,
       description: 'ImagePipeline',
       imageRecipeArn: imageRecipe.attrArn,
       infrastructureConfigurationArn: infrastructureConfiguration.attrArn,
       distributionConfigurationArn: distribution.attrArn,
-      //schedule: schedule,
     });
+
+    if (props.scheduleExpression) {
+      const schedule: imagebuilder.CfnImagePipeline.ScheduleProperty = {
+        pipelineExecutionStartCondition: 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE',
+        scheduleExpression: 'cron(0 8 1 * ? *)', //Run at 8:00 AM (UTC) on the first day of every month
+      };
+      imagePipeline.schedule = schedule;
+    }
 
     infrastructureConfiguration.addDependsOn(instanceProfile);
     imagePipeline.addDependsOn(distribution);

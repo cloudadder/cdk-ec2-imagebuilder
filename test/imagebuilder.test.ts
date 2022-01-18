@@ -22,6 +22,7 @@ describe('ImageBuilderStack', () => {
       subnetId: 'subnet-12345',
       securityGroupIds: ['sg-12345'],
       version: '1.0.0',
+      scheduleExpression: 'cron(0 0 * * ? *)',
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::Component', {
@@ -53,6 +54,13 @@ describe('ImageBuilderStack', () => {
         },
       ],
       Name: 'test-123',
+    });
+
+    Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::ImagePipeline', {
+      Schedule: {
+        PipelineExecutionStartCondition: 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE',
+        ScheduleExpression: 'cron(0 8 1 * ? *)',
+      },
     });
   });
 });
