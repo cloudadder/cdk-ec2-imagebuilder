@@ -14,9 +14,9 @@ export interface ImageBuilderProps {
   readonly componentsFolder: string;
   /**
    * Parent AMI Image Arn.
-   * @default - Default to latest Amazon Linux 2 AMI
+   * @default - the latest Amazon Linux 2 AMI
    *
-   * ```typescript
+   * ```
    * 'arn:aws:imagebuilder:' + Stack.of(this).region + ':aws:image/amazon-linux-2-x86/x.x.x'
    * ```
    */

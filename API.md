@@ -166,7 +166,7 @@ public readonly parentImage: string;
 ```
 
 - *Type:* `string`
-- *Default:* Default to latest Amazon Linux 2 AMI  ```typescript 'arn:aws:imagebuilder:' + Stack.of(this).region + ':aws:image/amazon-linux-2-x86/x.x.x' ```
+- *Default:* the latest Amazon Linux 2 AMI  ``` 'arn:aws:imagebuilder:' + Stack.of(this).region + ':aws:image/amazon-linux-2-x86/x.x.x' ```
 
 Parent AMI Image Arn.
 
