@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { aws_iam as iam, aws_imagebuilder as imagebuilder, CfnOutput, Tags } from 'aws-cdk-lib';
+import { aws_iam as iam, aws_imagebuilder as imagebuilder, CfnOutput, Stack, Tags } from 'aws-cdk-lib';
 import { CfnImageRecipe } from 'aws-cdk-lib/aws-imagebuilder';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { Construct } from 'constructs';
@@ -14,13 +14,9 @@ export interface ImageBuilderProps {
   readonly componentsFolder: string;
   /**
    * Parent AMI Image Arn.
+   * @default - Default to latest Amazon Linux 2 AMI - 'arn:aws:imagebuilder:[process.env.CDK_DEFAULT_REGION]:aws:image/amazon-linux-2-x86/x.x.x'
    */
-  readonly parentImage: string;
-
-  /**
-   * region the build will run in.
-   */
-  readonly region: string;
+  readonly parentImage?: string;
 
   /**
    * the AMI name.
@@ -49,13 +45,16 @@ export interface ImageBuilderProps {
 
   /**
    * the instance types to use for the build.
+   * @default - [t3.medium]
    */
-  readonly instanceTypes: string[];
+  readonly instanceTypes?: string[];
 }
 
 export class ImageBuilder extends Construct {
   constructor(scope: Construct, id: string, props: ImageBuilderProps) {
     super(scope, id);
+
+    const region = Stack.of(this).region;
 
     const role = new iam.Role(this, 'ImageBuilderRole', {
       assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
@@ -96,7 +95,7 @@ export class ImageBuilder extends Construct {
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {
       version: props.version,
       name: 'ImageRecipe' + props.id,
-      parentImage: props.parentImage,
+      parentImage: props.parentImage || 'arn:aws:imagebuilder:' + region + ':aws:image/amazon-linux-2-x86/x.x.x',
       components: componentArns,
     });
 
@@ -104,7 +103,7 @@ export class ImageBuilder extends Construct {
     const infrastructureConfiguration = new imagebuilder.CfnInfrastructureConfiguration(this, 'ImageInfrastructureConfiguration', {
       name: 'ImageInfrastructureConfiguration' + props.id,
       description: 'ImageInfrastructureConfiguration',
-      instanceTypes: props.instanceTypes,
+      instanceTypes: props.instanceTypes || ['t3.medium'],
       instanceProfileName: 'ImageBuilderInstanceProfile' + props.id,
       keyPair: key.keyPairName,
       securityGroupIds: props.securityGroupIds,
@@ -115,7 +114,7 @@ export class ImageBuilder extends Construct {
 
     const distribution = new imagebuilder.CfnDistributionConfiguration(this, 'ImageDistributionConfiguration', {
       distributions: [{
-        region: props.region,
+        region: region,
         amiDistributionConfiguration: {
           name: props.amiName + '-{{imagebuilder:buildDate}}',
         },

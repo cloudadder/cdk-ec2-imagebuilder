@@ -61,12 +61,11 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 | [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | the AMI name. |
 | [`componentsFolder`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsfolder)<span title="Required">*</span> | `string` | Local folder name including path which contains the component yaml files. |
 | [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | the id to use as a name suffix to identify resources. |
-| [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes)<span title="Required">*</span> | `string`[] | the instance types to use for the build. |
-| [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage)<span title="Required">*</span> | `string` | Parent AMI Image Arn. |
-| [`region`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyregion)<span title="Required">*</span> | `string` | region the build will run in. |
 | [`securityGroupIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysecuritygroupids)<span title="Required">*</span> | `string`[] | the securityGroupIds to use for the build. |
 | [`subnetId`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysubnetid)<span title="Required">*</span> | `string` | the subnet id to use for the build. |
 | [`version`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyversion)<span title="Required">*</span> | `string` | version to use in the metadata of the build. |
+| [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | the instance types to use for the build. |
+| [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage) | `string` | Parent AMI Image Arn. |
 
 ---
 
@@ -106,42 +105,6 @@ the id to use as a name suffix to identify resources.
 
 ---
 
-##### `instanceTypes`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.instanceTypes" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes"></a>
-
-```typescript
-public readonly instanceTypes: string[];
-```
-
-- *Type:* `string`[]
-
-the instance types to use for the build.
-
----
-
-##### `parentImage`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.parentImage" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage"></a>
-
-```typescript
-public readonly parentImage: string;
-```
-
-- *Type:* `string`
-
-Parent AMI Image Arn.
-
----
-
-##### `region`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.region" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyregion"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* `string`
-
-region the build will run in.
-
----
-
 ##### `securityGroupIds`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.securityGroupIds" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertysecuritygroupids"></a>
 
 ```typescript
@@ -177,6 +140,32 @@ public readonly version: string;
 version to use in the metadata of the build.
 
 AWS requires a version unique to the build, therefore incrementing the version number is required for each deployment.
+
+---
+
+##### `instanceTypes`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.instanceTypes" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes"></a>
+
+```typescript
+public readonly instanceTypes: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* [t3.medium]
+
+the instance types to use for the build.
+
+---
+
+##### `parentImage`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.parentImage" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage"></a>
+
+```typescript
+public readonly parentImage: string;
+```
+
+- *Type:* `string`
+- *Default:* Default to latest Amazon Linux 2 AMI - 'arn:aws:imagebuilder:[process.env.CDK_DEFAULT_REGION]:aws:image/amazon-linux-2-x86/x.x.x'
+
+Parent AMI Image Arn.
 
 ---
 
