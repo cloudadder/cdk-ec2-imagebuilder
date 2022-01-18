@@ -57,7 +57,7 @@ export interface ImageBuilderProps {
   readonly instanceTypes?: string[];
 
   /**
-   * The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI.
+   * The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI in cron format ```0 0 * * ? *```.
    * @default - No schedule
    */
   readonly scheduleExpression?: string;
@@ -146,7 +146,7 @@ export class ImageBuilder extends Construct {
     if (props.scheduleExpression) {
       const schedule: imagebuilder.CfnImagePipeline.ScheduleProperty = {
         pipelineExecutionStartCondition: 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE',
-        scheduleExpression: 'cron(' + props.scheduleExpression + ')' || 'cron(0 8 1 * ? *)', //Run at 8:00 AM (UTC) on the first day of every month
+        scheduleExpression: 'cron(' + props.scheduleExpression + ')',
       };
       imagePipeline.schedule = schedule;
     }

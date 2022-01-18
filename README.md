@@ -2,13 +2,8 @@
 [![release](https://github.com/cloudadder/cdk-ec2-imagebuilder/actions/workflows/release.yml/badge.svg)](https://github.com/cloudadder/cdk-ec2-imagebuilder/actions/workflows/release.yml)
 
 # cdk-ec2-imagebuilder
-This is a collection of AWS CDK Constructs to simplify deployments.
-
 ## Installation and Usage
-
-### [ImageBuilder](https://github.com/cloudadder/cdk-ec2-imagebuilder/blob/main/src/imagebuilder.ts)
 #### Creates an [EC2 Image Builder](https://aws.amazon.com/image-builder/) using cdk to create EC2 AMIs
-##### Typescript
 ```console
 npm install @cloudadder/cdk-ec2-imagebuilder
 ```
@@ -33,6 +28,10 @@ export class ImageBuilderStack extends Stack {
 }
 ```
 
-## License
+#### Links
+* [npmjs](https://www.npmjs.com/package/@cloudadder/cdk-ec2-imagebuilder)
+* [cdk constructs.dev](https://constructs.dev/packages/@cloudadder/cdk-ec2-imagebuilder)
+
+#### License
 
 Distributed under the [Apache-2.0](./LICENSE) license.

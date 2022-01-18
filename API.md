@@ -66,7 +66,7 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 | [`version`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyversion)<span title="Required">*</span> | `string` | Version to use in the metadata of the build. |
 | [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | The instance types to use for the build. |
 | [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage) | `string` | Parent AMI Image Arn. |
-| [`scheduleExpression`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyscheduleexpression) | `string` | The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI. |
+| [`scheduleExpression`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyscheduleexpression) | `string` | The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI in cron format ```0 0 * * ? *```. |
 
 ---
 
@@ -181,7 +181,7 @@ public readonly scheduleExpression: string;
 - *Type:* `string`
 - *Default:* No schedule
 
-The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI.
+The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI in cron format ```0 0 * * ? *```.
 
 ---
 
