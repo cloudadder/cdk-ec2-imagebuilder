@@ -23,13 +23,11 @@ export class ImageBuilderStack extends Stack {
 
     new ImageBuilder(this, 'ImageBuilder', {
       componentsFolder: './test/components',
-      parentImage: 'arn:aws:imagebuilder:ap-southeast-2:aws:image/amazon-linux-2-x86/x.x.x',
-      region: 'ap-southeast-2',
       amiName: 'test-ami',
       subnetId: 'subnet-12345',
       securityGroupIds: ['sg-12345'],
       version: '1.0.0',
-      instanceTypes: ['t2.micro'],
+      id: 'test-123',
     });
   }
 }
