@@ -58,13 +58,13 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | the AMI name. |
+| [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | The AMI name. |
 | [`componentsFolder`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsfolder)<span title="Required">*</span> | `string` | Local folder name including path which contains the component yaml files. |
-| [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | the id to use as a name suffix to identify resources. |
-| [`securityGroupIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysecuritygroupids)<span title="Required">*</span> | `string`[] | the securityGroupIds to use for the build. |
-| [`subnetId`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysubnetid)<span title="Required">*</span> | `string` | the subnet id to use for the build. |
-| [`version`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyversion)<span title="Required">*</span> | `string` | version to use in the metadata of the build. |
-| [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | the instance types to use for the build. |
+| [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | The id to use as a name suffix to identify resources. |
+| [`securityGroupIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysecuritygroupids)<span title="Required">*</span> | `string`[] | The securityGroupIds to use for the build. |
+| [`subnetId`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysubnetid)<span title="Required">*</span> | `string` | The subnet id to use for the build. |
+| [`version`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyversion)<span title="Required">*</span> | `string` | Version to use in the metadata of the build. |
+| [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | The instance types to use for the build. |
 | [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage) | `string` | Parent AMI Image Arn. |
 
 ---
@@ -77,7 +77,7 @@ public readonly amiName: string;
 
 - *Type:* `string`
 
-the AMI name.
+The AMI name.
 
 ---
 
@@ -101,7 +101,7 @@ public readonly id: string;
 
 - *Type:* `string`
 
-the id to use as a name suffix to identify resources.
+The id to use as a name suffix to identify resources.
 
 ---
 
@@ -113,7 +113,9 @@ public readonly securityGroupIds: string[];
 
 - *Type:* `string`[]
 
-the securityGroupIds to use for the build.
+The securityGroupIds to use for the build.
+
+A single subnet id is enough to allow access to the build instance. The subnet must support [ssm agent installation](https://aws.amazon.com/premiumsupport/knowledge-center/ssm-agent-install-issues-linux/)
 
 ---
 
@@ -125,7 +127,7 @@ public readonly subnetId: string;
 
 - *Type:* `string`
 
-the subnet id to use for the build.
+The subnet id to use for the build.
 
 ---
 
@@ -137,7 +139,7 @@ public readonly version: string;
 
 - *Type:* `string`
 
-version to use in the metadata of the build.
+Version to use in the metadata of the build.
 
 AWS requires a version unique to the build, therefore incrementing the version number is required for each deployment.
 
@@ -152,7 +154,7 @@ public readonly instanceTypes: string[];
 - *Type:* `string`[]
 - *Default:* [t3.medium]
 
-the instance types to use for the build.
+The instance types to use for the build.
 
 ---
 

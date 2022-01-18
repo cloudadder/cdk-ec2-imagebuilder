@@ -19,32 +19,35 @@ export interface ImageBuilderProps {
   readonly parentImage?: string;
 
   /**
-   * the AMI name.
+   * The AMI name.
    */
   readonly amiName: string;
 
   /**
-   * the id to use as a name suffix to identify resources.
+   * The id to use as a name suffix to identify resources.
    */
   readonly id: string;
 
   /**
-   * the subnet id to use for the build.
+   * The subnet id to use for the build.
    */
   readonly subnetId: string;
 
   /**
-   * the securityGroupIds to use for the build.
+   * The securityGroupIds to use for the build.
+   * A single subnet id is enough to allow access to the build instance.
+   * The subnet must support [ssm agent installation](https://aws.amazon.com/premiumsupport/knowledge-center/ssm-agent-install-issues-linux/)
    */
   readonly securityGroupIds: string[];
 
   /**
-   * version to use in the metadata of the build.   AWS requires a version unique to the build, therefore incrementing the version number is required for each deployment.
+   * Version to use in the metadata of the build.
+   * AWS requires a version unique to the build, therefore incrementing the version number is required for each deployment.
    */
   readonly version: string;
 
   /**
-   * the instance types to use for the build.
+   * The instance types to use for the build.
    * @default - [t3.medium]
    */
   readonly instanceTypes?: string[];
