@@ -14,7 +14,11 @@ export interface ImageBuilderProps {
   readonly componentsFolder: string;
   /**
    * Parent AMI Image Arn.
-   * @default - Default to latest Amazon Linux 2 AMI - 'arn:aws:imagebuilder:[process.env.CDK_DEFAULT_REGION]:aws:image/amazon-linux-2-x86/x.x.x'
+   * @default - Default to latest Amazon Linux 2 AMI
+   *
+   * ```typescript
+   * 'arn:aws:imagebuilder:' + Stack.of(this).region + ':aws:image/amazon-linux-2-x86/x.x.x'
+   * ```
    */
   readonly parentImage?: string;
 
@@ -142,7 +146,7 @@ export class ImageBuilder extends Construct {
     if (props.scheduleExpression) {
       const schedule: imagebuilder.CfnImagePipeline.ScheduleProperty = {
         pipelineExecutionStartCondition: 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE',
-        scheduleExpression: 'cron(0 8 1 * ? *)', //Run at 8:00 AM (UTC) on the first day of every month
+        scheduleExpression: 'cron(' + props.scheduleExpression + ')' || 'cron(0 8 1 * ? *)', //Run at 8:00 AM (UTC) on the first day of every month
       };
       imagePipeline.schedule = schedule;
     }
