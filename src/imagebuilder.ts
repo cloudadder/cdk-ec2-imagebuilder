@@ -10,8 +10,16 @@ var componentArns: Array<CfnImageRecipe.ComponentConfigurationProperty> = [];
 export interface ImageBuilderProps {
   /**
    * Local folder name including path which contains the component yaml files.
+   * e.g. ```'./src/components'```
    */
   readonly componentsFolder: string;
+
+  /**
+   * A list of AWS managed component arns to be used in the image recipe.
+   * e.g. In the console under EC2 Image Builder->Components-reboot-linux you will find the arn of the reboot-linux component.
+   */
+  readonly componentsManagedByAWS?: string[];
+
   /**
    * Parent AMI Image Arn.
    * @default - the latest Amazon Linux 2 AMI
@@ -28,7 +36,7 @@ export interface ImageBuilderProps {
   readonly amiName: string;
 
   /**
-   * The id to use as a name suffix to identify resources.
+   * The id to use as a name suffix to identify resources in AWS.
    */
   readonly id: string;
 
@@ -52,7 +60,7 @@ export interface ImageBuilderProps {
 
   /**
    * The instance types to use for the build.
-   * @default - [t3.medium]
+   * @default - ```[t3.medium]```
    */
   readonly instanceTypes?: string[];
 
@@ -104,6 +112,12 @@ export class ImageBuilder extends Construct {
       Tags.of(component).add('component-' + count, file);
       count++;
     });
+
+    if (props.componentsManagedByAWS) {
+      props.componentsManagedByAWS.forEach((componentArn: string) => {
+        componentArns.push({ componentArn });
+      });
+    }
 
     const imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', {
       version: props.version,

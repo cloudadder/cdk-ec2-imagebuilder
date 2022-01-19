@@ -60,10 +60,11 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 | --- | --- | --- |
 | [`amiName`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyaminame)<span title="Required">*</span> | `string` | The AMI name. |
 | [`componentsFolder`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsfolder)<span title="Required">*</span> | `string` | Local folder name including path which contains the component yaml files. |
-| [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | The id to use as a name suffix to identify resources. |
+| [`id`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyid)<span title="Required">*</span> | `string` | The id to use as a name suffix to identify resources in AWS. |
 | [`securityGroupIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysecuritygroupids)<span title="Required">*</span> | `string`[] | The securityGroupIds to use for the build. |
 | [`subnetId`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertysubnetid)<span title="Required">*</span> | `string` | The subnet id to use for the build. |
 | [`version`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyversion)<span title="Required">*</span> | `string` | Version to use in the metadata of the build. |
+| [`componentsManagedByAWS`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsmanagedbyaws) | `string`[] | A list of AWS managed component arns to be used in the image recipe. |
 | [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | The instance types to use for the build. |
 | [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage) | `string` | Parent AMI Image Arn. |
 | [`scheduleExpression`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyscheduleexpression) | `string` | The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI in cron format ```0 0 * * ? *```. |
@@ -92,6 +93,8 @@ public readonly componentsFolder: string;
 
 Local folder name including path which contains the component yaml files.
 
+e.g. ```'./src/components'```
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.id" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyid"></a>
@@ -102,7 +105,7 @@ public readonly id: string;
 
 - *Type:* `string`
 
-The id to use as a name suffix to identify resources.
+The id to use as a name suffix to identify resources in AWS.
 
 ---
 
@@ -146,6 +149,20 @@ AWS requires a version unique to the build, therefore incrementing the version n
 
 ---
 
+##### `componentsManagedByAWS`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.componentsManagedByAWS" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertycomponentsmanagedbyaws"></a>
+
+```typescript
+public readonly componentsManagedByAWS: string[];
+```
+
+- *Type:* `string`[]
+
+A list of AWS managed component arns to be used in the image recipe.
+
+e.g. In the console under EC2 Image Builder->Components-reboot-linux you will find the arn of the reboot-linux component.
+
+---
+
 ##### `instanceTypes`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.instanceTypes" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes"></a>
 
 ```typescript
@@ -153,7 +170,7 @@ public readonly instanceTypes: string[];
 ```
 
 - *Type:* `string`[]
-- *Default:* [t3.medium]
+- *Default:* ```[t3.medium]```
 
 The instance types to use for the build.
 

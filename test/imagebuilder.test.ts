@@ -17,6 +17,7 @@ describe('ImageBuilderStack', () => {
 
     new ImageBuilder(stack, 'ImageBuilder', {
       componentsFolder: './test/components',
+      componentsManagedByAWS: ['arn:aws:imagebuilder:ap-southeast-2:aws:component/reboot-linux/1.0.1/1'],
       amiName: 'test-ami',
       id: 'test-123',
       subnetId: 'subnet-12345',
@@ -34,6 +35,19 @@ describe('ImageBuilderStack', () => {
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::ImageRecipe', {
       ParentImage: 'arn:aws:imagebuilder:ap-southeast-2:aws:image/amazon-linux-2-x86/x.x.x',
+      Components: [
+        {
+          ComponentArn: {
+            'Fn::GetAtt': [
+              'ImageBuilderComponenthelloworldyaml785EB055',
+              'Arn',
+            ],
+          },
+        },
+        {
+          ComponentArn: 'arn:aws:imagebuilder:ap-southeast-2:aws:component/reboot-linux/1.0.1/1',
+        },
+      ],
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::IAM::Role', {
