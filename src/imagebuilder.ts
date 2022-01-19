@@ -69,6 +69,11 @@ export interface ImageBuilderProps {
    * @default - No schedule
    */
   readonly scheduleExpression?: string;
+
+  /**
+   * The account ids to share the AMI with.
+   */
+  readonly targetAccountIds?: string[];
 }
 
 export class ImageBuilder extends Construct {
@@ -139,6 +144,7 @@ export class ImageBuilder extends Construct {
 
     });
 
+
     const distribution = new imagebuilder.CfnDistributionConfiguration(this, 'ImageDistributionConfiguration', {
       distributions: [{
         region: region,
@@ -148,6 +154,9 @@ export class ImageBuilder extends Construct {
       }],
       name: props.id,
     });
+    if (props.targetAccountIds) {
+      distribution.addPropertyOverride('Distributions.0.AmiDistributionConfiguration.targetAccountIds', props.targetAccountIds);
+    }
 
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {
       name: 'ImagePipeline' + props.id,

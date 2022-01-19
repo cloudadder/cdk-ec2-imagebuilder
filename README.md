@@ -2,8 +2,8 @@
 [![release](https://github.com/cloudadder/cdk-ec2-imagebuilder/actions/workflows/release.yml/badge.svg)](https://github.com/cloudadder/cdk-ec2-imagebuilder/actions/workflows/release.yml)
 
 # cdk-ec2-imagebuilder
-## Installation and Usage
-#### Creates an [EC2 Image Builder](https://aws.amazon.com/image-builder/) using cdk to create EC2 AMIs
+### Installation and Usage
+Creates an [EC2 Image Builder](https://aws.amazon.com/image-builder/) using cdk to create EC2 AMIs
 ```console
 npm install @cloudadder/cdk-ec2-imagebuilder
 ```
