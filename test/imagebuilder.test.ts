@@ -24,7 +24,7 @@ describe('ImageBuilderStack', () => {
       securityGroupIds: ['sg-12345'],
       version: '1.0.0',
       scheduleExpression: '0 0 * * ? *',
-      targetAccountIds: ['123456789012'],
+      shareAccountIds: ['123456789012'],
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::ImageBuilder::Component', {
@@ -64,9 +64,11 @@ describe('ImageBuilderStack', () => {
         {
           AmiDistributionConfiguration: {
             name: 'test-ami-{{imagebuilder:buildDate}}',
-            targetAccountIds: [
-              '123456789012',
-            ],
+            launchPermission: {
+              userIds: [
+                '123456789012',
+              ],
+            },
           },
           Region: 'ap-southeast-2',
         },

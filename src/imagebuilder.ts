@@ -73,7 +73,7 @@ export interface ImageBuilderProps {
   /**
    * The account ids to share the AMI with.
    */
-  readonly targetAccountIds?: string[];
+  readonly shareAccountIds?: string[];
 }
 
 export class ImageBuilder extends Construct {
@@ -154,8 +154,9 @@ export class ImageBuilder extends Construct {
       }],
       name: props.id,
     });
-    if (props.targetAccountIds) {
-      distribution.addPropertyOverride('Distributions.0.AmiDistributionConfiguration.targetAccountIds', props.targetAccountIds);
+
+    if (props.shareAccountIds) {
+      distribution.addPropertyOverride('Distributions.0.AmiDistributionConfiguration.launchPermission.userIds', props.shareAccountIds);
     }
 
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {

@@ -68,7 +68,7 @@ const imageBuilderProps: ImageBuilderProps = { ... }
 | [`instanceTypes`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyinstancetypes) | `string`[] | The instance types to use for the build. |
 | [`parentImage`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyparentimage) | `string` | Parent AMI Image Arn. |
 | [`scheduleExpression`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyscheduleexpression) | `string` | The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/userguide/cron-expressions.html) for creating a refresh schedule of the AMI in cron format ```0 0 * * ? *```. |
-| [`targetAccountIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertytargetaccountids) | `string`[] | The account ids to share the AMI with. |
+| [`shareAccountIds`](#cloudaddercdkec2imagebuilderimagebuilderpropspropertyshareaccountids) | `string`[] | The account ids to share the AMI with. |
 
 ---
 
@@ -203,10 +203,10 @@ The [scheduleExpression](https://docs.aws.amazon.com/imagebuilder/latest/usergui
 
 ---
 
-##### `targetAccountIds`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.targetAccountIds" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertytargetaccountids"></a>
+##### `shareAccountIds`<sup>Optional</sup> <a name="@cloudadder/cdk-ec2-imagebuilder.ImageBuilderProps.property.shareAccountIds" id="cloudaddercdkec2imagebuilderimagebuilderpropspropertyshareaccountids"></a>
 
 ```typescript
-public readonly targetAccountIds: string[];
+public readonly shareAccountIds: string[];
 ```
 
 - *Type:* `string`[]
