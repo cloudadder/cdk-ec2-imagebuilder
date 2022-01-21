@@ -156,7 +156,7 @@ export class ImageBuilder extends Construct {
     });
 
     if (props.shareAccountIds) {
-      distribution.addPropertyOverride('Distributions.0.AmiDistributionConfiguration.launchPermission.userIds', props.shareAccountIds);
+      distribution.addPropertyOverride('Distributions.0.AmiDistributionConfiguration.LaunchPermissionConfiguration.UserIds', props.shareAccountIds);
     }
 
     const imagePipeline = new imagebuilder.CfnImagePipeline(this, 'ImagePipeline', {

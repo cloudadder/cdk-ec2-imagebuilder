@@ -64,8 +64,8 @@ describe('ImageBuilderStack', () => {
         {
           AmiDistributionConfiguration: {
             name: 'test-ami-{{imagebuilder:buildDate}}',
-            launchPermission: {
-              userIds: [
+            LaunchPermissionConfiguration: {
+              UserIds: [
                 '123456789012',
               ],
             },
