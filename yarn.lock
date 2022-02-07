@@ -1334,9 +1334,9 @@ case@1.6.3, case@^1.6.3:
   integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
 
 cdk-ec2-key-pair@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.0.1.tgz#fc85980f9ac3f4447d3d66987d7522d75dea5a6b"
-  integrity sha512-xa3mXeZ2bNVW6sdePTXmpUdBA150Z5Sol3G7XE6XUJI0xRVqWbdbpn2neamPS4QBQJklFfShj2UWDRATAJwaUw==
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/cdk-ec2-key-pair/-/cdk-ec2-key-pair-3.2.0.tgz#f9b1a46bb8365b64a65ec1c2981bc134ab4b63aa"
+  integrity sha512-fTWLYxQrln1ztiBLcGvF1pMHsFckqCSkBai1k25E+qA4PqiSAwAaw7gCo3oETZ6TFKnN6og2gkmmItbzyjZqJw==
 
 cdk-iam-floyd@^0.305.0:
   version "0.305.0"
